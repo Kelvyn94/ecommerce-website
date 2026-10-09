@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* ==========================================================================
+   1. CSS Variables & Theme Setup
+   ========================================================================== */
+:root {
+  --color-papaya-whip: #ffefd5;
+  --color-butterscotch: #e09f3e;
+  --color-butterscotch-light: #f4a261;
+  --color-caf-noir: #3d2314;
+  --color-jet: #222222;
+  --color-licorice: #1a0f0a;
+  --color-white: #ffffff;
+  
+  --font-primary: 'Cormorant Garamond', serif;
+  --font-secondary: 'Montserrat', sans-serif;
+  
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   2. Base & Resets
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-papaya-whip);
+  color: var(--color-jet);
+  font-family: var(--font-secondary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-papaya-whip);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-butterscotch);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-caf-noir);
+}
+
+/* ==========================================================================
+   3. Custom Typography
+   ========================================================================== */
+h1, h2, h3, .font-primary {
+  font-family: var(--font-primary);
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   4. Reusable UI Components & Buttons
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-text {
+  background: transparent;
+  color: var(--color-caf-noir);
+  border: 1px solid var(--color-caf-noir);
+}
+
+.btn-text:hover {
+  background-color: var(--color-caf-noir);
+  color: var(--color-papaya-whip);
+}
+
+/* Arrow Navigation Buttons */
+.arrow-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.arrow-button:hover {
+  background-color: var(--color-butterscotch);
+  border-color: var(--color-butterscotch);
+  color: var(--color-white) !important;
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   5. Header & Navigation Layout
+   ========================================================================== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(61, 35, 20, 0.95);
+  backdrop-filter: blur(10px);
+  transition: var(--transition-smooth);
+}
+
+.navbar-link {
+  color: var(--color-papaya-whip);
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-butterscotch);
+  transition: var(--transition-smooth);
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background-color: var(--color-white);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-hover);
+  padding: 0.75rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition-smooth);
+}
+
+li:hover > .dropdown,
+.dropdown:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  color: var(--color-jet);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: var(--transition-smooth);
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(224, 159, 62, 0.1);
+  color: var(--color-butterscotch);
+  padding-left: 1.5rem;
+}
+
+/* Modern Cart Modal */
+.cart-modal {
+  background: var(--color-white);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-hover);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   6. Hero & Product Showcase Cards
+   ========================================================================== */
+.hero {
+  position: relative;
+  background-color: var(--color-caf-noir);
+  overflow: hidden;
+}
+
+.card {
+  position: relative;
+  border-radius: 0.75rem;
+  background-size: cover;
+  background-position: center;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  min-height: 280px;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.75) 100%);
+  transition: var(--transition-smooth);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card:hover::before {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+.card p {
+  position: relative;
+  z-index: 1;
+  color: var(--color-white) !important;
+}
+
+/* ==========================================================================
+   7. Product Sliders & Grid Cards
+   ========================================================================== */
+.slider {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+}
+
+.slider-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  background-color: var(--color-white);
+  border-radius: 0.75rem;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-soft);
+}
+
+.slider-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.img-holder {
+  overflow: hidden;
+  position: relative;
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Offer Banner Cards */
+.off-card {
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.off-card:hover {
+  transform: scale(1.02);
+}
+
+/* ==========================================================================
+   8. Testimonials Section
+   ========================================================================== */
+.testimonial-card {
+  border: 1px solid rgba(61, 35, 20, 0.08);
+  box-shadow: var(--shadow-soft);
+}
+
+.rating ion-icon {
+  font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   9. Footer Styles
+   ========================================================================== */
+footer {
+  background-color: var(--color-papaya-whip);
+  border-top: 1px solid rgba(61, 35, 20, 0.1);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(61, 35, 20, 0.1);
+  text-align: center;
+  font-size: 0.875rem;
+}
